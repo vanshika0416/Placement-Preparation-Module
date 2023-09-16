@@ -43,26 +43,25 @@ class Solution
     {
         // Your code here
         ArrayList<Integer> lst=new ArrayList<>();
-        int j=0;int sum=0;
-        for(int i=0;i<n;i++)
+        int i=0;int sum=0;
+
+        for(int j=0;j<n;j++)
         {
-            sum+=arr[i];
-            while(sum>s && j<i)
+            sum+=arr[j];
+            while(sum>s && i<j)
             {
-                sum-=arr[j];
-                j++;
+                sum-=arr[i];
+                i++;
             }
             if(sum==s)
             {
-                lst.add(j+1);
                 lst.add(i+1);
-                break;
+                lst.add(j+1);
+                return lst;
             }
         }
         if(lst.isEmpty())
-        {
-            lst.add(-1);
-        }
+        lst.add(-1);
         return lst;
     }
 }
