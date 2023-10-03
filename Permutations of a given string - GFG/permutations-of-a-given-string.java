@@ -30,27 +30,33 @@ class GFG
 
 
 class Solution {
-    public List<String> find_permutation(String S)
+    public List<String> find_permutation(String str) 
     {
         // Code here
         ArrayList<String> lst=new ArrayList<>();
-        per(S,"",lst);
-        Collections.sort(lst);
-        return lst;
+        char ch[]=str.toCharArray();
+        permutation(ch,lst,0);
+         Collections.sort(lst);
+         return lst;
     }
-    
-    public static void per(String str,String per,ArrayList<String> lst)
+    public void permutation(char ch[],ArrayList<String> lst,int idx)
     {
-        if(str.length()==0)
+        if(idx==ch.length-1)
         {
-            if(!lst.contains(per))
-            lst.add(per);
+            if(!lst.contains(new String(ch)))
+            lst.add(new String(ch));
         }
-        for(int i=0;i<str.length();i++)
+        for(int i=idx;i<ch.length;i++)
         {
-            char ch=str.charAt(i);
-            String newstr=str.substring(0,i)+str.substring(i+1);
-            per(newstr,per+ch,lst);
+            swap(ch,i,idx);
+            permutation(ch,lst,idx+1);
+            swap(ch,idx,i);
         }
+    }
+    public void swap(char ch[],int start,int end)
+    {
+        char temp=ch[start];
+        ch[start]=ch[end];
+        ch[end]=temp;
     }
 }
